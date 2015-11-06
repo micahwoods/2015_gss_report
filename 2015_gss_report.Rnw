@@ -84,7 +84,7 @@ Table~\ref{tab:sumtable} summarizes the data collected so far.\footnote{The data
 <<sumtable,results='asis',echo=FALSE>>=
 options(xtable.comment = FALSE)
 options(xtable.booktabs = TRUE)
-sum.table <- xtable(sum.table, caption = "Summary of Global Soil Survey data from September 2013 through August 2014.", label = "tab:sumtable")
+sum.table <- xtable(sum.table, caption = "Summary of Global Soil Survey data from September 2013 through August 2015.", label = "tab:sumtable")
 digits(sum.table) <- c(0, 0, 0, 0, 0, 0, 0, 0)
 print(sum.table, include.rownames = FALSE)
 @
