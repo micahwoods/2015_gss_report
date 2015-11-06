@@ -79,7 +79,7 @@ First, to provide a summary of the first year results to those who have particip
 
 In this report we won't repeat the description and demonstration of the calculations of nutrient guideline levels. We refer you to last year's report\cite[-1cm]{Woods2014} for that. Rather, we reiterate our thanks to all who have participated in this exciting project, and we provide here a summary of the data collected so far, concluding with a discussion about the implications of these data.
 
-Table~\ref{tab:sumtable} summarizes the data collected so far.\footnote{The data are available at xxx.csv and the code used for this report is in this github repository.} The GSS samples are explicitly collected from good performing turf. We know, then, that the soil chemical conditions at the times the samples were collected -- and thus the GSS data -- were suitable for producing good turf. 
+Table~\ref{tab:sumtable} summarizes the data collected so far.\footnote{The data are available at \url{https://github.com/micahwoods/2015_gss_report/blob/master/data/20151011_gss.csv} and the code used for this report is in this GitHub repository: \url{https://github.com/micahwoods/2015_gss_report}} The GSS samples are explicitly collected from good performing turf. We know, then, that the soil chemical conditions at the times the samples were collected -- and thus the GSS data -- were suitable for producing good turf. 
 
 <<sumtable,results='asis',echo=FALSE>>=
 options(xtable.comment = FALSE)
@@ -168,7 +168,7 @@ This is the same approach used to calculate the minimum levels for sustainable n
 \item[Sulfur] The S appears unremarkable in every way!
 \end{description}
 
-If you wonder how the micronutrients are, or the nitrogen, or the Bray or Olsen phosphorus, or anything else, please use the data for your own analyses. We've removed identifying location information, and with the exception of that the full data are available at xxx.csv.
+If you wonder how the micronutrients are, or the nitrogen, or the Bray or Olsen phosphorus, or anything else, please use the data for your own analyses. We've removed identifying location information, and with the exception of that the full data\footnote{\url{https://github.com/micahwoods/2015_gss_report/blob/master/data/20151011_gss.csv}} are available on GitHub.
 
 \section{Ending the survey}
 
