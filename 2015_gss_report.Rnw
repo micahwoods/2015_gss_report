@@ -1,0 +1,186 @@
+\documentclass[a4paper]{tufte-handout}
+
+%\geometry{showframe}% for debugging purposes -- displays the margins
+
+\usepackage{amsmath}
+\usepackage{fixltx2e}   % allows to use \textsubscript
+
+\hyphenation{turf-grass}
+
+% Set up the images/graphics package
+\usepackage{graphicx}
+\setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
+\graphicspath{{graphics/}}
+
+\title{2015 Global Soil Survey Report}
+\author{Micah Woods, Larry Stowell, and Wendy Gelernter}
+\date{5 November 2015}  
+
+% The following package makes prettier tables.  
+\usepackage{booktabs}
+
+% The units package provides nice, non-stacked fractions and better spacing
+% for units.
+\usepackage{units}
+
+% The fancyvrb package lets us customize the formatting of verbatim
+% environments.  We use a slightly smaller font.
+\usepackage{fancyvrb}
+\fvset{fontsize=\normalsize}
+
+% Small sections of multiple columns
+\usepackage{multicol}
+
+% Provides paragraphs of dummy text
+\usepackage{lipsum}
+
+% These commands are used to pretty-print LaTeX commands
+\newcommand{\doccmd}[1]{\texttt{\textbackslash#1}}% command name -- adds backslash automatically
+\newcommand{\docopt}[1]{\ensuremath{\langle}\textrm{\textit{#1}}\ensuremath{\rangle}}% optional command argument
+\newcommand{\docarg}[1]{\textrm{\textit{#1}}}% (required) command argument
+\newenvironment{docspec}{\begin{quote}\noindent}{\end{quote}}% command specification environment
+\newcommand{\docenv}[1]{\textsf{#1}}% environment name
+\newcommand{\docpkg}[1]{\texttt{#1}}% package name
+\newcommand{\doccls}[1]{\texttt{#1}}% document class name
+\newcommand{\docclsopt}[1]{\texttt{#1}}% document class option name
+
+\usepackage{siunitx}  	% for consistent & correct units
+\DeclareSIUnit\month{mo}
+\DeclareSIUnit\year{yr}
+
+\begin{document}
+
+\maketitle % this prints the handout title, author, and date
+
+\marginnote[-0.5cm]{Micah Woods, Asian Turfgrass Center, Bangkok, Thailand. Larry Stowell and Wendy Gelernter, PACE Turf, San Diego, USA.}
+
+\newthought{This is the report on the second year} of the Global Soil Survey (GSS).\footnote{See the project website at \url{https://www.paceturf.org/journal/global_soil_survey}} From September 2014 through August 2015, 54 samples from good-performing turf were added to the dataset. These samples have been added to the 84 samples from the first year of the GSS, putting the total now at 138 samples from nine countries. The sample locations are shown in Figure~\ref{fig:locations}.
+
+\begin{figure*} 
+\includegraphics{figure/2015_gss_location.png} 
+\caption{Red circles on this world map indicate the locations from which samples were submitted in year one (September 2013 to August 2014) of the Global Soil Survey, and blue triangles mark the year 2 sample locations (September 2014 to August 2015).}
+\label{fig:locations}
+\end{figure*}
+
+<<readdata, results='hide',echo=FALSE, include=FALSE>>=
+source("r/summary_table.R")
+
+@
+
+\section{Data summary}
+
+\newthought{In the first year report} of the GSS, we wrote with these three objectives:
+
+\begin{quote}
+
+First, to provide a summary of the first year results to those who have participated in the survey. Second, to describe and demonstrate how we use these data to calculate a nutrient guideline level. Third, to share the results of this project with the public.
+
+\end{quote}
+
+In this report we won't repeat the description and demonstration of the calculations of nutrient guideline levels. We refer you to last year's report\cite[-1cm]{Woods2014} for that. Rather, we reiterate our thanks to all who have participated in this exciting project, and we provide here a summary of the data collected so far, concluding with a discussion about the implications of these data.
+
+Table~\ref{tab:sumtable} summarizes the data collected so far.\footnote{The data are available at xxx.csv and the code used for this report is in this github repository.} The GSS samples are explicitly collected from good performing turf. We know, then, that the soil chemical conditions at the times the samples were collected -- and thus the GSS data -- were suitable for producing good turf. 
+
+<<sumtable,results='asis',echo=FALSE>>=
+options(xtable.comment = FALSE)
+options(xtable.booktabs = TRUE)
+sum.table <- xtable(sum.table, caption = "Summary of Global Soil Survey data from September 2013 through August 2014.", label = "tab:sumtable")
+digits(sum.table) <- c(0, 0, 0, 0, 0, 0, 0, 0)
+print(sum.table, include.rownames = FALSE)
+@
+
+You'll notice n of 138 -- the number of samples -- for all parameters but calcium (Ca), which has an n of 135. We filtered the Ca data to remove three calcareous samples with Mehlich 3 Ca greater than 3,000 ppm and a pH greater than 7.7.\footnote{The Mehlich 3 extractant dissolves calcium carbonate in calcareous soils. These soils are saturated with Ca and have more than enough to supply all the Ca the grass will use. However, the inflated Ca values reported by this test are not correct, and thus we filtered the data to omit them before making our analyses.} The table then shows the minimum value measured in all these samples, the median and the mean, the maximum value, and then the GSS. 
+
+The median is lower than the mean for all the macronutrients and secondary nutrients -- K, P, Ca, Mg, and S. Why is that? The distribution of the test results for these elements is not shaped like a bell curve. If it was, the median would be the same as the mean. But there are some samples than have a pretty high level of an element in the soil, and that skews the mean to be higher than the median. Figure~\ref{fig:histograms} shows the distributions for the data collected in the first two years of the survey.
+
+\begin{figure*}
+<<appendix, results='asis', echo=FALSE>>=
+# make hist of pH, OM, P, Ca, Mg, S
+
+par(mfrow=c(3,3))
+hist(gss$pH, main = NULL, xlab = "pH", breaks = 50)
+abline(v = median(gss$pH), col = "Blue")
+hist(gss$OM, main = NULL, xlab = "Organic matter (%)", breaks = 50)
+abline(v = median(gss$OM), col = "Blue")
+hist(gss$KM3, main = NULL, xlab = "K (ppm)", breaks = 50)
+abline(v = median(gss$KM3), col = "Blue")
+hist(gss$PM3, main = NULL, xlab = "P (ppm)", breaks = 50)
+abline(v = median(gss$PM3), col = "Blue")
+hist(gssCa$CaM3, main = NULL, xlab = "Ca (ppm)", breaks = 50)
+abline(v = median(gss$CaM3), col = "Blue")
+hist(gss$MgM3, main = NULL, xlab = "Mg (ppm)", breaks = 50)
+abline(v = median(gss$MgM3), col = "Blue")
+hist(gss$SM3, main = NULL, xlab = "S (ppm)", breaks = 50)
+abline(v = median(gss$SM3), col = "Blue")
+@
+\caption{Histograms of Global Soil Survey data through August 2015. The vertical blue line in each histogram marks the median value for those data.}
+\label{fig:histograms}
+\end{figure*}
+
+\begin{marginfigure}
+<<kfisk, results='asis', echo=FALSE>>=
+par(cex = 2)
+myhist <- hist(gss$KM3, breaks = 50, plot = FALSE)
+multiplier <- myhist$counts / myhist$density
+  mydensity <- density(gss$KM3, na.rm = TRUE)
+  mydensity$y <- mydensity$y * multiplier[1]
+  
+  myx <- seq(min(gss$KM3, na.rm = TRUE), max(gss$KM3, na.rm = TRUE), length.out= 200)
+  mymean <- mean(gss$KM3, na.rm = TRUE)
+  mysd <- sd(gss$KM3, na.rm = TRUE)
+  
+  normal <- dnorm(x = myx, mean = mymean, sd = mysd)
+plot(myhist, main = NULL, xlab = "K (ppm)")
+lines(mydensity, col = "#7570b3", lwd = 6, main = NULL)
+lines(myx, normal * multiplier[1], col = "#d95f02", lwd = 6, main = NULL)
+
+  fit.x <- vglm(gss$KM3 ~ 1, fisk)
+  z <- Coef(fit.x)
+  fisk.nums <- dfisk(myx, z[1], z[2])
+  
+  
+  lines(myx, fisk.nums * multiplier[1], col = "#1b9e77", lwd = 6, main = NULL)
+
+legend(120, 13, c("density", "normal", "Fisk"),
+         col=c("#7570b3", "#d95f02", "#1b9e77"),
+         lwd = 6)
+
+@
+\caption{A histogram of the GSS K data with curves showing the density, a normal distribution, and a Fisk distribution.}
+\label{fig:kfisk}
+\end{marginfigure}
+
+The GSS column in Table~\ref{tab:sumtable} shows the calculated 0.1 level after fitting a log logistic model (Fisk distribution) to the data. That is, for the fitted model, the probability of a value being less or equal to the ``GSS'' column value is 0.1. Figure~\ref{fig:kfisk} shows the K data as an example with overlying lines for a normal distribution, the density, and the fitted Fisk distribution.
+
+This is the same approach used to calculate the minimum levels for sustainable nutrition (MLSN)\cite[1.5cm]{gcm-mlsn-2014} guidelines, applied to the GSS data rather than to the MLSN data. We do not intend for the analysis of the GSS data to supplant the MLSN guidelines, but rather to use these data for a comparative analysis.
+
+\section{Discussion of results so far}
+
+\newthought{It has been} interesting to see the GSS dataset grow. With so many locations included in the dataset, from so many countries, soil types, and grass types, this is as representative a dataset as we know of for a wide range of soils all producing good turf at the time the sample was collected. And if one thing stands out so far, it is that good turf is being produced in soils with nutrient levels even lower than we expected.
+
+\begin{description}
+\item[pH] The range of pH is about what we expected. From a minimum of 4.6 to a maximum of 8.2, with a median of 6.4 -- that's about the range in which we expect to see good performing turf. 
+\item[Organic matter] From less than 0.2\% to 10\% covers the range of what we usually see in turf soils. The samples with less than the median of 2\% organic matter will tend to be in sandy soils.
+\item[Potassium] A median of 60.5 is not a surprise; that so many samples have been relatively low is a surprise. Of the 138 samples in the dataset, and keep in mind these are selected from good performing turf areas, the soil K at the time of sampling was less than 40 ppm in 25 of those samples -- soil K was less than or equal to the current MLSN guideline of 37 ppm in 24 out of the 138 samples. Good turf is being produced in soils with K even lower than we would have expected. 
+\item[Phosphorus] There seems to be ample P in almost all the soils submitted so far. 
+\item[Calcium] If we compare the current MLSN guideline to the GSS shown in Table~\ref{tab:sumtable} of this report, the Ca has the biggest difference of all the elements. The MLSN guideline for Ca is 331 ppm and an analysis of the GSS data gives a value of 254 ppm.
+\item[Magnesium] The Mg is similar to K in that there are a lot of samples that seem low to us -- 31 out of 138 are at or below the current MLSN guideline of 47 ppm.
+\item[Sulfur] The S appears unremarkable in every way!
+\end{description}
+
+If you wonder how the micronutrients are, or the nitrogen, or the Bray or Olsen phosphorus, or anything else, please use the data for your own analyses. We've removed identifying location information, and with the exception of that the full data are available at xxx.csv.
+
+\section{Ending the survey}
+
+\newthought{The Global Soil Survey} will end on 31 December 2015.\footnote{We had planned to keep this survey going for years, but are shutting it down at the end of December. The work involved with running the survey exceeds the return from the number of samples being submitted. We are grateful to all the turf managers who have submitted samples to this project, and are impressed that together we've been able to assemble this dataset representing turf soils from 9 countries (so far), from just about every type of turf, and so many types of facilities.} If you would like to add samples from your location before the survey ends, kits are available at \url{https://www.paceturf.org/shop/product/global_soil_survey_kit}. 
+
+\section{What comes next?}
+
+\newthought{More samples} have been added to the dataset, and more kits are likely to be returned before the end of the year. We will then prepare a final report for the project, and will share the updated dataset. We intend to use this dataset for comparison and study in many of our future projects, and we hope that other researchers will too. 
+
+\nobibliography{/home/myuser/Documents/reports/citation.bib}
+\bibliographystyle{plainnat}
+
+\end{document}
+
+%\printclassoptions
