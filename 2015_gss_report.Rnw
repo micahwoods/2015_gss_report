@@ -1,7 +1,5 @@
 \documentclass[a4paper]{tufte-handout}
 
-%\geometry{showframe}% for debugging purposes -- displays the margins
-
 \usepackage{amsmath}
 \usepackage{fixltx2e}   % allows to use \textsubscript
 
@@ -30,19 +28,6 @@
 
 % Small sections of multiple columns
 \usepackage{multicol}
-
-% Provides paragraphs of dummy text
-\usepackage{lipsum}
-
-% These commands are used to pretty-print LaTeX commands
-\newcommand{\doccmd}[1]{\texttt{\textbackslash#1}}% command name -- adds backslash automatically
-\newcommand{\docopt}[1]{\ensuremath{\langle}\textrm{\textit{#1}}\ensuremath{\rangle}}% optional command argument
-\newcommand{\docarg}[1]{\textrm{\textit{#1}}}% (required) command argument
-\newenvironment{docspec}{\begin{quote}\noindent}{\end{quote}}% command specification environment
-\newcommand{\docenv}[1]{\textsf{#1}}% environment name
-\newcommand{\docpkg}[1]{\texttt{#1}}% package name
-\newcommand{\doccls}[1]{\texttt{#1}}% document class name
-\newcommand{\docclsopt}[1]{\texttt{#1}}% document class option name
 
 \usepackage{siunitx}  	% for consistent & correct units
 \DeclareSIUnit\month{mo}
@@ -172,11 +157,14 @@ If you wonder how the micronutrients are, or the nitrogen, or the Bray or Olsen 
 
 \section{Ending the survey}
 
-\newthought{The Global Soil Survey} will end on 31 December 2015.\footnote{We had planned to keep this survey going for years, but are shutting it down at the end of December. The work involved with running the survey exceeds the return from the number of samples being submitted. We are grateful to all the turf managers who have submitted samples to this project, and are impressed that together we've been able to assemble this dataset representing turf soils from 9 countries (so far), from just about every type of turf, and so many types of facilities.} If you would like to add samples from your location before the survey ends, kits are available at \url{https://www.paceturf.org/shop/product/global_soil_survey_kit}. 
+\newthought{The Global Soil Survey} will end on 31 December 2015.\footnote{We had planned to keep this survey going indefinitely, but are shutting it down at the end of December. The work involved with running the survey exceeds the return from the time spent on this project. We are grateful to all the turf managers who have submitted samples to this project, and are impressed that together we've been able to assemble this dataset representing turf soils from 9 countries (so far), from just about every type of turf.} If you would like to add samples from your location before the survey ends, kits are available at \url{https://www.paceturf.org/shop/product/global_soil_survey_kit}. 
 
-\section{What comes next?}
+\subsection{What comes next?}
 
-\newthought{More samples} have been added to the dataset, and more kits are likely to be returned before the end of the year. We will then prepare a final report for the project, and will share the updated dataset. We intend to use this dataset for comparison and study in many of our future projects, and we hope that other researchers will too. 
+Since the end of August 2015, more samples have been added to the dataset, and more kits are likely to be returned before the end of the year. We will then prepare a final report for the project, and will share the updated dataset. We intend to use this dataset for comparison and study in many of our future projects, and we hope that other researchers will too. 
+
+\subsection{About the map}
+The map in Figure~\ref{fig:locations} was made with code modified from \url{http://rud.is/b/2015/10/04/replicating-natgeos-proper-earthquake-map-in-r/}. Locations were added using the \texttt{ggmap}\cite[1cm]{ggmap} package.
 
 \nobibliography{/home/myuser/Documents/reports/citation.bib}
 \bibliographystyle{plainnat}
