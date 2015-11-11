@@ -2,7 +2,7 @@ The files in this repository will generate the 2015 [Global Soil Survey](http://
 
 ### If you just want a copy of the report
 
-[Download](https://www.paceturf.org/PTRI/Documents/2015_gss_report.pdf) a `pdf` copy of the first year report.
+[Download](https://www.paceturf.org/PTRI/Documents/2015_gss_report.pdf) a `pdf` copy of the Global Soil Survey second year report.
 
 ### If you want to see, study, or analyze the GSS data 
 
